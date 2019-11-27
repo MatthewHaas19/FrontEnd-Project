@@ -17,9 +17,25 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="myForm.value['isHidden'] === 'no'">
       <textarea matInput placeholder="value" formControlName="value"></textarea>
     </mat-form-field>
+
+    <section class="Make-section">
+      <label class="Make-margin">Value optional ?  </label>
+      <mat-radio-group formControlName="isOptional">
+        <mat-radio-button class="Make-margin" value="yes">Yes</mat-radio-button>
+        <mat-radio-button class="Make-margin" value="no">No</mat-radio-button>
+      </mat-radio-group>
+    </section>
+
+    <section class="Make-section">
+      <label class="Make-margin">Value hidden ?    </label>
+      <mat-radio-group formControlName="isHidden">
+        <mat-radio-button class="Make-margin" value="yes">Yes</mat-radio-button>
+        <mat-radio-button class="Make-margin" value="no">No</mat-radio-button>
+      </mat-radio-group>
+    </section>
 
     <button mat-raised-button color="accent" type="submit">S'enregistrer</button>
 
@@ -28,3 +44,5 @@
 
 
 </mat-card>
+
+<app-result></app-result>

@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResultComponent } from './result/result.component';
 import {RouterModule, Routes} from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 
 const appRoutes: Routes = [
   { path: 'result', component: ResultComponent},
@@ -35,7 +37,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    MatRadioModule,
     AppRoutingModule,
+    MatCheckboxModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatFormFieldModule,

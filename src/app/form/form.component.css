@@ -10,3 +10,15 @@
   flex-direction: column;
   width: 100%;
 }
+
+.Make-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+  margin: auto;
+}
+
+.Make-margin {
+  margin: 0 10px;
+}

@@ -44,7 +44,9 @@ export class FormComponent implements OnInit {
     this.myForm = this.formBuilder.group({
       label : '',
       type : '',
-      value : ''
+      value : '',
+      isOptional : 'no',
+      isHidden : 'no'
     });
   }
 
@@ -74,7 +76,7 @@ export class FormComponent implements OnInit {
     console.log(this.credentials)
 
 
-    this.router.navigate(['result'])
+  //  this.router.navigate(['result'])
 
   }
 
