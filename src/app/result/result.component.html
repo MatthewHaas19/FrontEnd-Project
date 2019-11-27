@@ -1,1 +1,4 @@
-<mat-card><h1> Result </h1></mat-card>
+<mat-card *ngFor="let result of results | async;">
+  <h4>Result</h4>
+  <p>{{result.label}}</p>
+</mat-card>

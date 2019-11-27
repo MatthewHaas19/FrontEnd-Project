@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import {FormDetails} from '../../form.service';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs'
 
 @Component({
   selector: 'app-result',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultComponent implements OnInit {
 
-  constructor() { }
+  Json : String;
+
+  results: Observable<FormDetails[]>;
+
+  constructor(private store: Store<{results : FormDetails[]}>) {
+
+  }
 
   ngOnInit() {
+    this.results = this.store.pipe(select('results'))
+
+    console.log(this.results);
+
   }
+
+
+
 
 }
