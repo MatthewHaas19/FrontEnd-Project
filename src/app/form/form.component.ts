@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms'
-import {FormService, FormDetails} from '../../form.service'
+import {FormService, FormDetails,FormFields, JSONoutput} from '../../form.service'
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs'
@@ -13,26 +13,34 @@ import {ResultAdd} from '../../app.state';
 })
 export class FormComponent implements OnInit {
 
-  private id = 0;
-  myForm : FormGroup;
 
+  myForm : FormGroup;
 
   title = 'FrontEnd Assessment';
 
-  results: Observable<FormDetails[]>;
+  results: Observable<JSONoutput[]>;
 
-  credentials: FormDetails = {
+  json: JSONoutput = {
+    label : "",
+    value : "",
+    isValid: false,
+
+  };
+
+
+  credentials: FormFields = {
     label : "",
     type : "",
     value : "",
-
-  } as FormDetails;
+    isOptional : 'no',
+    isHidden : 'no'
+  };
 
 
   constructor(private formBuilder: FormBuilder,
               private formService: FormService,
               private router: Router,
-              private store: Store<{results : FormDetails[]}>) {
+              private store: Store<{results : JSONoutput[]}>) {
                 this.results = store.pipe(select('results'))
               }
 
@@ -43,7 +51,7 @@ export class FormComponent implements OnInit {
   initForm(){
     this.myForm = this.formBuilder.group({
       label : '',
-      type : '',
+      type : 'number',
       value : '',
       isOptional : 'no',
       isHidden : 'no'
@@ -51,14 +59,12 @@ export class FormComponent implements OnInit {
   }
 
   addResult() {
-    const results = {
-      label: this.credentials.label,
-      type: this.credentials.type,
-      value: this.credentials.value
-    }
-
-    this.store.dispatch(new ResultAdd(results))
-
+    console.log(this.json)
+    const result = new JSONoutput();
+    result.label = this.json.label;
+    result.value = this.json.value;
+    result.isValid = this.json.isValid;
+    this.store.dispatch(new ResultAdd(result))
   }
 
 
@@ -69,11 +75,23 @@ export class FormComponent implements OnInit {
     this.credentials.label = formValue.label
     this.credentials.type = formValue.type
     this.credentials.value = formValue.value
+    this.credentials.isOptional = formValue.isOptional
+    this.credentials.isHidden = formValue.isHidden
 
-    this.addResult()
 
+    this.formService.generateJson(this.credentials).subscribe((data) => {
+      console.log(data);
+      if(data.error){
+        alert(data.error)
+      }
+      else{
+        this.json.label = data.label;
+        this.json.value = data.value;
+        this.json.isValid = true;
+        this.addResult()
+      }
+    })
 
-    console.log(this.credentials)
 
 
   //  this.router.navigate(['result'])

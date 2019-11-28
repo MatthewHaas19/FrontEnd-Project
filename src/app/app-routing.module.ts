@@ -5,7 +5,6 @@ import { ResultComponent } from './result/result.component';
 import { FormComponent } from './form/form.component';
 
 const routes: Routes = [
-  { path: 'result', component: ResultComponent},
   { path: '', component: FormComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: '**', redirectTo: 'not-found'}

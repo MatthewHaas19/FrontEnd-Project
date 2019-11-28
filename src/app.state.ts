@@ -1,9 +1,8 @@
-import { FormDetails } from './form.service';
 import {Action} from '@ngrx/store';
 
 export enum ResultActionTypes {
-  Add = '[Form Component] Add',
-  Remove = '[Form Component] Remove'
+  Add = '[Form] Add',
+  Remove = '[Form] Remove'
 }
 
 export class ActionEx implements Action {

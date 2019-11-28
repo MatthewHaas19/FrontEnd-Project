@@ -1,4 +1,5 @@
-<mat-card *ngFor="let result of results | async;">
+<mat-card *ngFor="let result of results | async; let i = index">
   <h4>{{result.label}}</h4>
   <p>{{result.value}}</p>
+  <button mat-raised-button color="accent" (click)="removeResult(i)">Remove</button>
 </mat-card>
