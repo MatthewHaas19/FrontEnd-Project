@@ -1,5 +1,9 @@
 import {Action} from '@ngrx/store';
 
+//We define the app state action manager
+
+
+//Method selector : Add or Remove
 export enum ResultActionTypes {
   Add = '[Form] Add',
   Remove = '[Form] Remove'

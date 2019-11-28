@@ -1,48 +1,25 @@
+
+<!-- We display the card with all the fields of our form -->
 <mat-card><h1> {{title}} </h1></mat-card>
 
 <mat-card>
 
-  <h2>Form Field</h2>
+  <h2>Form Fields</h2>
 
   <form class="container" [formGroup]="myForm" (ngSubmit)="onSubmitForm()">
-    <mat-form-field>
-      <input matInput placeholder="label" formControlName="label">
+    <mat-form-field formArrayName="values" *ngFor="let field of myForm.get('values').controls; let i = index">
+      <div [formGroupName]="i">
+        <input matInput [hidden]="myForm.controls.values.controls[i].controls.isHidden.value !== false"
+        placeholder="{{myForm.controls.values.controls[i].controls.label.value}}" formControlName="value" type="{{myForm.controls.values.controls[i].controls.type.value}}">
+      </div>
     </mat-form-field>
-
-    <mat-form-field>
-      <mat-select placeholder="field type" formControlName="type">
-        <mat-option value="number">Number</mat-option>
-        <mat-option value="text">Text</mat-option>
-        <mat-option value="email">Email</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field *ngIf="myForm.value['isHidden'] === 'no'">
-      <textarea matInput placeholder="value" formControlName="value"></textarea>
-    </mat-form-field>
-
-    <section class="Make-section">
-      <label class="Make-margin">Value optional ?  </label>
-      <mat-radio-group formControlName="isOptional">
-        <mat-radio-button class="Make-margin" value="yes">Yes</mat-radio-button>
-        <mat-radio-button class="Make-margin" value="no">No</mat-radio-button>
-      </mat-radio-group>
-    </section>
-
-    <section class="Make-section">
-      <label class="Make-margin">Value hidden ?    </label>
-      <mat-radio-group formControlName="isHidden">
-        <mat-radio-button class="Make-margin" value="yes">Yes</mat-radio-button>
-        <mat-radio-button class="Make-margin" value="no">No</mat-radio-button>
-      </mat-radio-group>
-    </section>
 
     <button mat-raised-button color="accent" type="submit">Submit</button>
 
-
   </form>
 
-
 </mat-card>
+
+<!-- We display the result component when there is a result -->
 
 <app-result></app-result>

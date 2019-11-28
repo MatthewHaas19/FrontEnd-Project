@@ -9,7 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule,
          MatFormFieldModule,
          MatInputModule,
+         MatSnackBarModule,
          MatSelectModule,
+         MatSliderModule,
+         MatIconModule,
          MatButtonModule} from '@angular/material';
 import { FormComponent } from './form/form.component';
 import { FormService } from '../form.service';
@@ -31,7 +34,10 @@ import {MatRadioModule} from '@angular/material/radio';
   ],
   imports: [
     BrowserModule,
+    MatIconModule,
+    MatSnackBarModule,
     MatRadioModule,
+    MatSliderModule,
     AppRoutingModule,
     MatCheckboxModule,
     BrowserAnimationsModule,

@@ -1,5 +1,8 @@
-<mat-card *ngFor="let result of results | async; let i = index">
-  <h4>{{result.label}}</h4>
-  <p>{{result.value}}</p>
-  <button mat-raised-button color="accent" (click)="removeResult(i)">Remove</button>
+
+<!-- For all of the results, we display there label, there value and an icon if the result is valid -->
+<mat-card>
+  <div class="container" *ngFor="let result of results | async; let i = index">
+  <p>{{result.label}} : {{result.value}}  <mat-icon *ngIf="result.isValid">done_outline</mat-icon></p>
+  <p *ngIf="result.label === 'rate'"> ---------</p>
+  </div>
 </mat-card>

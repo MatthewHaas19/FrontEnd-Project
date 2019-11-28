@@ -3,6 +3,8 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+//We define a service which will permit to check if our fields are correct and we also define our models.
+
 
 export interface FormDetails {
   label: string
@@ -10,12 +12,13 @@ export interface FormDetails {
   value: string
 }
 
-export interface FormFields {
+export interface Field {
   label: string
   type: string
   value: string
-  isOptional: string
-  isHidden: string
+  default: string
+  isOptional: boolean
+  isHidden: boolean
 }
 
 export class JSONoutput {
@@ -34,45 +37,27 @@ export class FormService {
   constructor(){}
 
 
-  public generateJson(result: FormFields) : Observable<any> {
+  //We check for all of our fields if the type is correct and if there is no missing field
+  public generateJson(fields: Field[]) : Observable<any> {
 
-    if(!result.label){
-      return of(JSON.parse('{"error" : "ERROR_missingeLabel"}'))
-    }
-
-    if(result.isOptional === 'no' && !result.value){
-      return of(JSON.parse('{"error" : "ERROR_MissingField"}'));
-    }
-    else{
-      if(!result.value){
-        return of(result)
+    for(let field of fields){
+      if(!field.isOptional && !field.value){
+        return of(JSON.parse('{"error" : "Missinge Field"}'));
       }
-    }
 
-
-    if(result.type === "number"){
-      if(Number(result.value)){
-        return of(result);
-      }
-      else{
-        return of(JSON.parse('{"error" : "ERROR_Number"}'));
-      }
-    }
-    if(result.type === "email"){
-
-        const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-        if(regexp.test(result.value)){
-          return of(result);
+      if(field.type === "number"){
+        if(!Number(field.value) && field.value !== '0'){
+          return of(JSON.parse('{"error" : "Value is not a number"}'));
         }
-        else{
-          return of(JSON.parse('{"error" : "ERROR_Mail"}'));
-        }
+      }
+
+      if(field.type === "mail"){
+          const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+          if(!regexp.test(field.value)){
+            return of(JSON.parse('{"error" : "Value is not of mail type"}'));
+          }
+      }
     }
-    else{
-      return of(result);
-    }
-
-
-
+    return of(fields)
   }
 }
