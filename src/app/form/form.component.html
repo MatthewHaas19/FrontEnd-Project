@@ -1,0 +1,30 @@
+<mat-card><h1> {{title}} </h1></mat-card>
+
+<mat-card>
+
+  <h2>Form</h2>
+
+  <form class="container" [formGroup]="myForm" (ngSubmit)="onSubmitForm()">
+    <mat-form-field>
+      <input matInput placeholder="label" formControlName="label">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="field type" formControlName="type">
+        <mat-option value="number">Number</mat-option>
+        <mat-option value="text">Text</mat-option>
+        <mat-option value="email">Email</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="value" formControlName="value"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" type="submit">S'enregistrer</button>
+
+
+  </form>
+
+
+</mat-card>
