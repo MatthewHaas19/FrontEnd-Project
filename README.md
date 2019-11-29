@@ -26,4 +26,4 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
   - The page should look like this : 
   
-  ![alt text](https://www.noelshack.com/2019-48-5-1575042585-4b1872f9-f472-44f1-bfd5-ea1ae0d599b3.jpeg)
+  ![alt text](https://image.noelshack.com/fichiers/2019/48/5/1575042585-4b1872f9-f472-44f1-bfd5-ea1ae0d599b3.jpeg)
