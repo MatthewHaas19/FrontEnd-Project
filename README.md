@@ -1,27 +1,27 @@
-# FrontEndProject
+# FrontEnd Assessment Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
+This project was made with Angular version 7.3.8.
 
-## Development server
+## How to launch the project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1 - Download the git repository
+2 - Exctract the files
+3 - Open a terminal
+4 - Go in the FrontEnd-Project Folder
+5 - Download latest version of NodeJS here: https://nodejs.org/en/download/
+6 - Install the npm package manager: npm install -g npm@latest (Type it in the terminal, if it fails run it as administrator).
+7 - Install the angular CLI: npm install -g @angular/cli
 
-## Code scaffolding
+Now the command ng is available, so you can run the app:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng serve`. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
 ## Further help
+  
+  - If you want to modify the fields, just modify the file ApiFields.json
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  - The page should look like this : 
