@@ -10,7 +10,8 @@ This project was made with Angular version 7.3.8.
 4 - Go in the FrontEnd-Project Folder  
 5 - Download latest version of NodeJS here: https://nodejs.org/en/download/  
 6 - Install the npm package manager: npm install -g npm@latest (Type it in the terminal, if it fails run it as administrator).  
-7 - Install the angular CLI: npm install -g @angular/cli  
+7 - Install the angular CLI: npm install -g @angular/cli
+8 - Install angular-devkit/build-angular as dev dependency : npm install --save-dev @angular-devkit/build-angular  
 
 Now the command ng is available, so you can run the app:  
 
