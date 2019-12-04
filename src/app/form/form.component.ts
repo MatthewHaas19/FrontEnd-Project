@@ -81,6 +81,7 @@ export class FormComponent implements OnInit {
       label : field.label,
       type : field.type,
       value : [field.value],
+      result : '',
       default : field.default,
       isOptional : field.isOptional,
       isHidden : field.isHidden
@@ -129,7 +130,7 @@ export class FormComponent implements OnInit {
 
         for(let field of data){
           Json.label = field.label;
-          Json.value = field.value;
+          Json.value = field.result;
           Json.isValid = true;
           this.addResult(Json);
         }

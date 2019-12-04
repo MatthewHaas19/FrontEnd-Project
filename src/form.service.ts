@@ -55,36 +55,45 @@ export class FormService {
 
     let ret = []
     for(let field of fields){
-      if(!field.isOptional && !field.value){
-        return of(JSON.parse('{"error" : "Missinge Field"}'));
+      if(field.isHidden){
+        field.result = field.value;
       }
 
-      if(field.type === "number"){
-        if(!Number(field.value) && field.value !== '0'){
-          return of(JSON.parse('{"error" : "Value is not a number"}'));
+      if(!field.result){
+        if(field.isOptional){
+          if(field.default){
+            field.result = field.default;
+          }else{
+            field.result = ""
+          }
+        }
+        else{
+          if(!field.isOptional){
+            if(field.default){
+              field.result = field.default;
+            }
+            else{
+              return of(JSON.parse('{"error" : "Missinge Field"}'));
+            }
+          }
         }
       }
 
-    if((field.value instanceof Array) && (field.value.length > 1)){
-      if(field.default){
-        field.value = field.default;
-      }else{
-        field.value = ""
-      }
-    }
+
+
 
 
       if(field.type === "email"){
           const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-          if(!regexp.test(field.value)){
+          if(!regexp.test(field.result)){
             return of(JSON.parse('{"error" : "Value is not of mail type"}'));
           }
       }
 
       if(field.type === "telephone"){
           const regexp = new RegExp(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/);
-          if(!regexp.test(field.value)){
-            return of(JSON.parse('{"error" : "Value is not of telephone"}'));
+          if(!regexp.test(field.result)){
+            return of(JSON.parse('{"error" : "Value is not of telephone type"}'));
           }
       }
 
