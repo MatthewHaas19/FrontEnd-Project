@@ -20,6 +20,7 @@ export interface Field {
   label: string
   type: string
   value: any
+  result: any
   default: string
   isOptional: boolean
   isHidden: boolean
