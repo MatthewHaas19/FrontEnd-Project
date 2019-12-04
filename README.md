@@ -15,7 +15,7 @@ This project was made with Angular version 7.3.8.
 
 Now the command ng is available, so you can run the app:  
 
-Run `ng serve`. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve`, if it's not working, try : `npm start`. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
 
