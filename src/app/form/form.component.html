@@ -6,12 +6,48 @@
 
   <h2>Form Fields</h2>
 
-  <form class="container" [formGroup]="myForm" (ngSubmit)="onSubmitForm()">
+  <form *ngIf="Json" class="container" [formGroup]="myForm" (ngSubmit)="onSubmitForm()">
     <mat-form-field formArrayName="values" *ngFor="let field of myForm.get('values').controls; let i = index">
-      <div [formGroupName]="i">
-        <input matInput [hidden]="myForm.controls.values.controls[i].controls.isHidden.value !== false"
-        placeholder="{{myForm.controls.values.controls[i].controls.label.value}}" formControlName="value" type="{{myForm.controls.values.controls[i].controls.type.value}}">
+      <div [hidden]="myForm.controls.values.controls[i].controls.isHidden.value === true" [formGroupName]="i" *ngIf="(myForm.controls.values.controls[i].controls.type.value !== 'radio') &&
+      (myForm.controls.values.controls[i].controls.type.value !== 'select') &&
+      (myForm.controls.values.controls[i].controls.type.value !== 'telephone') &&
+      (myForm.controls.values.controls[i].controls.type.value !== 'hidden')">
+        <input
+        matInput
+        placeholder="{{myForm.controls.values.controls[i].controls.label.value}}"
+        formControlName="value"
+        type="{{myForm.controls.values.controls[i].controls.type.value}}">
       </div>
+      <div [formGroupName]="i">
+        <mat-select placeholder="{{myForm.controls.values.controls[i].controls.label.value}}"
+        *ngIf="myForm.controls.values.controls[i].controls.type.value === 'select'" formControlName="value">
+          <mat-option *ngFor="let item of myForm.controls.values.controls[i].controls.value.value" [value]="[item]" >{{item}}</mat-option>
+        </mat-select>
+      </div>
+      <div [formGroupName]="i" *ngIf="myForm.controls.values.controls[i].controls.type.value === 'telephone'">
+        <input
+        matInput [hidden]="myForm.controls.values.controls[i].controls.isHidden.value === true"
+        placeholder="{{myForm.controls.values.controls[i].controls.label.value}}"
+        formControlName="value"
+        type="text">
+      </div>
+
+      <div [formGroupName]="i" *ngIf="myForm.controls.values.controls[i].controls.type.value === 'hidden'">
+        <input
+        matInput [hidden]="myForm.controls.values.controls[i].controls.isHidden.value === true"
+        placeholder="{{myForm.controls.values.controls[i].controls.label.value}}"
+        formControlName="value"
+        type="text">
+      </div>
+
+      <div [formGroupName]="i" *ngIf="myForm.controls.values.controls[i].controls.type.value === 'radio'">
+      <input matInput placeholder="" style="display: none" >
+      <mat-radio-group aria-label="Select an option" formControlName="value">
+        <mat-radio-button *ngFor="let item of myForm.controls.values.controls[i].controls.value.value" [value]="[item]">{{item}}</mat-radio-button>
+      </mat-radio-group>
+      </div>
+
+
     </mat-form-field>
 
     <button mat-raised-button color="accent" type="submit">Submit</button>

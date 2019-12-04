@@ -3,6 +3,5 @@
 <mat-card>
   <div class="container" *ngFor="let result of results | async; let i = index">
   <p>{{result.label}} : {{result.value}}  <mat-icon *ngIf="result.isValid">done_outline</mat-icon></p>
-  <p *ngIf="result.label === 'rate'"> ---------</p>
   </div>
 </mat-card>

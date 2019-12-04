@@ -24,6 +24,8 @@
 }
 
 
-.slider{
-  color: #a9a9a9;
+.mat-radio-group{
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
 }

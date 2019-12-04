@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormReducer } from './reducers/form.reducer'
 import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,9 @@ import {RouterModule, Routes} from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import { InterceptorService } from '../interceptor.service';
+import {MatChipsModule} from '@angular/material/chips';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -30,11 +33,14 @@ import {MatRadioModule} from '@angular/material/radio';
     AppComponent,
     FormComponent,
     ResultComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ErrorComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     MatIconModule,
+    MatChipsModule,
     MatSnackBarModule,
     MatRadioModule,
     MatSliderModule,
@@ -50,7 +56,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatButtonModule,
     StoreModule.forRoot({results: FormReducer})
   ],
-  providers: [FormService],
+  providers: [FormService, {provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

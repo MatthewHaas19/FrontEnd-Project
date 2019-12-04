@@ -1,42 +1,4 @@
 [
-    {
-      "label" : "firstname",
-      "type" : "text",
-      "value" : "",
-      "default" : "",
-      "isOptional" : false,
-      "isHidden" : false
-    },
-    {
-      "label" : "lastname",
-      "type" : "text",
-      "value" : "",
-      "default" : "",
-      "isOptional" : false,
-      "isHidden" : false
-    },
-    {
-      "label" : "email",
-      "type" : "mail",
-      "value" : "",
-      "default" : "",
-      "isOptional" : false,
-      "isHidden" : false
-    },
-    {
-      "label" : "salary",
-      "type" : "number",
-      "value" : "",
-      "default" : "0",
-      "isOptional" : false,
-      "isHidden" : false
-    },
-    {
-      "label" : "rate",
-      "type" : "number",
-      "value" : "",
-      "default" : "0",
-      "isOptional" : false,
-      "isHidden" : false
-    }
+    {"label":"Gender","type":"radio","value":["M (Male)","F (Female)","X (Indeterminate/Intersex/Unspecified)"],"isOptional":true},
+    {"label":"email","type":"mail","value":"","isOptional":false, "isHidden":false}
 ]

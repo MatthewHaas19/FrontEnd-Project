@@ -1,0 +1,10 @@
+{
+  "/api": {
+   "target": "https://ansible-template-engine.herokuapp.com/form",
+   "secure": false,
+   "changeOrigin":true,
+    "pathRewrite": {
+            "^/api": ""
+    }
+ }
+}

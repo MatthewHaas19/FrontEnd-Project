@@ -27,6 +27,8 @@ export class FormComponent implements OnInit {
 
   title = 'FrontEnd Assessment';
 
+  Json : Field[];
+
   results: Observable<JSONoutput[]>;
 
   items : FormArray
@@ -46,18 +48,28 @@ export class FormComponent implements OnInit {
 
   //Method lauched when you access to the component
   ngOnInit() {
-    this.initForm();
+    this.myForm = this.formBuilder.group({});
+
+    //We call the method that will request the Json to the API
+    this.formService.getJsonFromApi().subscribe((data) => {
+        this.Json = data;
+
+        this.initForm(data);
+    },(error) => {
+      console.log("error : " + error);
+    }
+  )
   }
 
 
   //Building the form dynamicaly
-  initForm(){
+  initForm(data){
 
     this.myForm = this.formBuilder.group({
       values: this.formBuilder.array([])
     });
 
-    for(let field of JSONFields){
+    for(let field of data){
       this.addField(field)
     }
   }
@@ -68,7 +80,7 @@ export class FormComponent implements OnInit {
     return this.formBuilder.group({
       label : field.label,
       type : field.type,
-      value : field.value,
+      value : [field.value],
       default : field.default,
       isOptional : field.isOptional,
       isHidden : field.isHidden
@@ -126,10 +138,6 @@ export class FormComponent implements OnInit {
   }
 
 
-  //Method used form the slider to add the purcentage
-  formatLabel(value: number) {
-    return value + '%';
-  }
 
 
   //Open an alert pop-up if there is an error.
